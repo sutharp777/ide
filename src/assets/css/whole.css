@@ -1572,6 +1572,15 @@ footer.bg-dark a {
   }
 }
 
+
+/*
+Changing the editr=or padding to make the first line of unblocked*/
+
+#editor{
+
+padding-top:45px !important;
+}
+
 #editor.change_height {
   height: 92.5%!important;
 }
