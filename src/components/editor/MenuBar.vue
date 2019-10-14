@@ -37,7 +37,7 @@
             </button>
             <share></share>
             <button id="panelLang" type="button" class="btn btn-sm btn-menu" @click="showShortcutsModal()">
-              Shortcuts<i class="fa fa-reply-all" aria-hidden="true"></i>
+              Shortcuts <i class="fa fa-reply-all" aria-hidden="true"></i>
             </button>
           </div>
           <div class="logoMenu">
