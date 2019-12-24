@@ -1,5 +1,9 @@
 <template>
   <div class="wrapper" @keydown="keyShortCuts">
+    <i class="pointer times fa fa-times fa-lg" @click="() => this.showBanner=false"> </i>
+    <a target="_blank" href="https://online.codingblocks.com/app/spin/" v-if="this.showBanner">
+     <img class="w-100" src="../../assets/christmas-banner-ide.png" alt="">
+    </a>
     <div id="fs_control">
       <div class="panel panel-default">
         <div class="headPanel panel-heading">
@@ -129,7 +133,8 @@
         languages: ['C', 'C++', 'C#', 'Java', 'Python', 'Python3', 'Javascript', 'NodeJs', 'Ruby'],
         fullscreen: false,
         loading: false,
-        fileName: this.$store.state.fileName
+        fileName: this.$store.state.fileName,
+        showBanner: true
       }
     },
     methods: {
@@ -541,5 +546,11 @@
   }
   .second-row input {
     margin-bottom: 5px;
+  }
+  .times {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    top: 10px
   }
 </style>
