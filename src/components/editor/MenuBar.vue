@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper" @keydown="keyShortCuts">
     <i class="pointer times fa fa-times fa-lg" @click="() => this.showBanner=false"> </i>
-    <a target="_blank" href="https://online.codingblocks.com/app/spin/" v-if="this.showBanner">
+    <a target="_blank" href="https://cb.lk/swide" v-if="this.showBanner">
      <img class="w-100" src="../../assets/christmas-banner-ide.png" alt="">
     </a>
     <div id="fs_control">
