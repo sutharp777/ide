@@ -134,7 +134,7 @@
         fullscreen: false,
         loading: false,
         fileName: this.$store.state.fileName,
-        showBanner: true
+        showBanner: false
       }
     },
     methods: {
