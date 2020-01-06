@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper" @keydown="keyShortCuts">
     <i class="pointer times fa fa-times fa-lg" @click="() => this.showBanner=false"> </i>
-    <a target="_blank" href="https://cb.lk/swide" v-if="this.showBanner">
-     <img class="w-100" src="../../assets/christmas-banner-ide.png" alt="">
+    <a target="_blank" href="https://cb.lk/cmp/hb" v-if="this.showBanner">
+     <img class="w-100" src="https://minio.codingblocks.com/public/Strip.jpg" alt="">
     </a>
     <div id="fs_control">
       <div class="panel panel-default">
@@ -134,7 +134,7 @@
         fullscreen: false,
         loading: false,
         fileName: this.$store.state.fileName,
-        showBanner: false
+        showBanner: true
       }
     },
     methods: {
