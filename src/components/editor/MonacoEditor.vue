@@ -6,6 +6,18 @@
   import * as monaco from 'monaco-editor';
   import firepad from 'firepad';
 
+  const langModes = {
+    'c': 'c',
+    'cpp': 'cpp',
+    'c#': 'csharp',
+    'java8': 'java',
+    'py2': 'python',
+    'py3': 'python',
+    'jsv': 'javascript',
+    'nodejs6': 'javascript',
+    'ruby': 'ruby'
+  }
+
   export default {
     name: 'monaco-editor',
     mounted() {
@@ -18,7 +30,7 @@
           minimap: {
             showSlider: false
           },
-          language: this.$store.state.languageMode,
+          language: langModes[this.$store.state.language],
           automaticLayout: true,
           dragAndDrop: true,
           fontFamily: this.$store.state.font,
@@ -40,7 +52,7 @@
           case "uploadCode":
           case "setCode":
           case "changeLanguage":
-            monaco.editor.setModelLanguage(this.editor.getModel(), this.$store.state.languageMode)
+            monaco.editor.setModelLanguage(this.editor.getModel(), langModes[this.$store.state.language])
             this.editor.setValue(this.$store.state.code[this.$store.state.language] || '')
             break;
           case "changeTheme":

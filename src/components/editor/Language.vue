@@ -2,11 +2,11 @@
   <div class="btn-group" :class="{ open : isOpen}"  @click="open">
     <button id="panelLang" type="button" class="btn btn-sm btn-menu"
             aria-haspopup="true" aria-expanded="false" @blur="close" >
-      <span v-if="selected"> {{selected}} </span> <span class="fa fa-caret-down"></span>
+      <span v-if="selected"> {{selected.lang_name}} </span> <span class="fa fa-caret-down"></span>
        <i class="fa fa-code" aria-hidden="true"></i>
     </button>
     <ul class="dropdown-menu">
-        <li v-for="option in options" @click="select(option)"><span href="#">{{option}}</span></li>
+        <li v-for="option in options" @click="select(option.lang_slug)"><span href="#">{{option.lang_name}}</span></li>
     </ul>  
   </div>
 </template>
@@ -22,7 +22,7 @@
         }
       },
       selected: {
-        default: null
+        default: {}
       }
     },
     data() {
