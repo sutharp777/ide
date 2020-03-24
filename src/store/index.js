@@ -246,7 +246,7 @@ export default new Vuex.Store({
       return httpPost("/run", {
         lang: state.language,
         source: base64.encode(state.code[state.language]),
-        input: [base64.encode(state.customInput)]
+        input: base64.encode(state.customInput)
       })
         .then(({ data: { id } }) => {
           const start = new Date();
