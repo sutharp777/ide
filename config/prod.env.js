@@ -1,8 +1,8 @@
 'use strict'
 module.exports = {
   NODE_ENV: '"production"',
-  url: '"http://ide-test.cb.lk/"',
-  api: '"http://ide-backend-test.cb.lk/"',
+  url: '"https://ide.codingblocks.com/"',
+  api: '"https://ide-api.codingblocks.com/"',
   ONEAUTH: {
     url: '"https://account.codingblocks.com/"',
     clientId: '"760890190"',
