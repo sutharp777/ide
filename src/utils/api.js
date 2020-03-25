@@ -9,17 +9,22 @@ class API {
     })
   }
 
-  setToken = (token) => {
-    this.axi.headers['Authorization'] = 'Bearer ' + token;
-  }
+  setToken = token => this.token = token
 
   httpGet = (uri, params) => {
     return this.axi.get(uri, {
-      params
+      params,
+      headers: {
+        Authorization: 'Bearer ' + this.token
+      }
     })
   }
 
-  httpPost = (uri, data) => this.axi.post(uri, data)
+  httpPost = (uri, data) => this.axi.post(uri, data, {
+    headers: {
+      Authorization: 'Bearer ' + this.token
+    }
+  })
 }
 
 const api = new API()
