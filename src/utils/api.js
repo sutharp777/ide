@@ -10,7 +10,7 @@ class API {
   }
 
   setToken = (token) => {
-    this.axi.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+    this.axi.headers['Authorization'] = 'Bearer ' + token;
   }
 
   httpGet = (uri, params) => {
