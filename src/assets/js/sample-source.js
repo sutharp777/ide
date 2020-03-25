@@ -56,15 +56,15 @@ const js_sample =
 const ruby_sample = 'puts "Hello World!";'
 
 const lang_samples = {
-  'C': c_sample,
-  'C++': cpp_sample,
-  'C#': csharp_sample,
-  'Java': java_sample,
-  'Python': py2_sample,
-  'Python3': py3_sample,
-  'Javascript': js_sample,
-  'NodeJs': js_sample,
-  'Ruby': ruby_sample
+  'c': c_sample,
+  'cpp': cpp_sample,
+  'c#': csharp_sample,
+  'java8': java_sample,
+  'py2': py2_sample,
+  'py3': py3_sample,
+  'jsv': js_sample,
+  'nodejs6': js_sample,
+  'ruby': ruby_sample
 };
 
 export default lang_samples

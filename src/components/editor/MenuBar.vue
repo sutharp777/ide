@@ -11,7 +11,7 @@
               <span v-if="loading">Running</span>
               <span v-else> Run </span>
             </button>
-            <language :options=languages :selected=this.$store.state.language></language>
+            <language :options=languages :selected=selectedLang></language>
 
             <button class="btn btn-sm btn-menu">
             <router-link class="decoration-none" to="/" target="_blank" active-class="" exact-active-class="">
@@ -127,37 +127,38 @@
     components: {language, Settings, Share, LoginButton},
     data() {
       return {
-        languages: ['C', 'C++', 'C#', 'Java', 'Python', 'Python3', 'Javascript', 'NodeJs', 'Ruby'],
         fullscreen: false,
         loading: false,
         fileName: this.$store.state.fileName,
         showBanner: true
       }
     },
+    computed: {
+      languages() {
+        return Object.values(this.$store.state.langs);
+      },
+      selectedLang(){
+        return this.$store.state.langs[this.$store.state.language];
+      },
+    },
     methods: {
       runCode() {        
         this.loading = !this.loading
         this.$store.dispatch('runCode').then((data) => {
+          console.log(data);
           if (!this.$store.state.showInOutBox)
             this.$store.commit('toggleInOutBox')
           this.loading = false
-          if (data.result == 'compile_error') {
+          if (!data.is_successful && data.result !== 'success') {
             this.$notify({
               text: 'Compilation Error',
               type: 'error'
             })
-          } else if (data.result == 'success') {
-            if (data.data.testcases[0].result == 'run-error') {
-              this.$notify({
-                text: 'Runtime Error',
-                type: 'error'
-              })
-            } else {
+          } else {
               this.$notify({
                 text: 'Code Compiled Successfully',
                 type: 'success'
               })
-            }
           }
         }).catch(err => {
           console.error(err)
