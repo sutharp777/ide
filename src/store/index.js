@@ -35,7 +35,7 @@ export default new Vuex.Store({
     code: Object.assign({}, samples),
     sampleCodes: samples,
     langs: {},
-    language: "",
+    language: "cpp",
     theme: "vs-dark",
     font: "Ubuntu Mono",
     fontSize: 16,
