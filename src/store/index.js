@@ -197,12 +197,7 @@ export default new Vuex.Store({
             return data;
           })
       ]).then(([langs, code]) => {
-        if (code) {
-          commit("changeLanguage", code.language);
-        } else {
-          commit("changeLanguage", langs[langs.length - 1].lang_slug);
-        }
-
+        commit("changeLanguage", code ? code.language : "cpp");
         return [langs, code];
       });
     },

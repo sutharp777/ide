@@ -63,7 +63,8 @@ const lang_samples = {
   'py2': py2_sample,
   'py3': py3_sample,
   'jsv': js_sample,
-  'nodejs6': js_sample,
+  'nodejs8': js_sample,
+  'nodejs10': js_sample,
   'ruby': ruby_sample
 };
 
