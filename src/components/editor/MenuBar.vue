@@ -3,7 +3,7 @@
     <!-- <promotion-banner /> -->
     <div class="row" style="justify-content: center">
       <h4 class="bold" style="color: #fff;">
-        Down for maintainence ! We are improving performance and time please be calm and patient
+        We are facing slower response time !
       </h4>
     </div>
     <div id="fs_control">
