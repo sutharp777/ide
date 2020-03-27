@@ -1,6 +1,11 @@
 <template>
   <div class="wrapper" @keydown="keyShortCuts">
-    <promotion-banner />
+    <!-- <promotion-banner /> -->
+    <div class="row" style="justify-content: center">
+      <h4 class="bold" style="color: #fff;">
+        Down for maintainence ! We are improving performance and time please be calm and patient
+      </h4>
+    </div>
     <div id="fs_control">
       <div class="panel panel-default">
         <div class="headPanel panel-heading">
