@@ -14,7 +14,8 @@
     'py2': 'python',
     'py3': 'python',
     'jsv': 'javascript',
-    'nodejs6': 'javascript',
+    'nodejs8': 'javascript',
+    'nodejs10': 'javascript',
     'ruby': 'ruby'
   }
 

@@ -26,7 +26,8 @@ const extension = {
   cpp: ".cpp",
   java8: ".java",
   py2: ".py",
-  nodejs6: ".js",
+  nodejs8: ".js",
+  nodejs10: ".js",
   jsv: ".js"
 };
 
