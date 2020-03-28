@@ -1,11 +1,6 @@
 <template>
   <div class="wrapper" @keydown="keyShortCuts">
-    <!-- <promotion-banner /> -->
-    <div class="row" style="justify-content: center">
-      <h4 class="bold" style="color: #fff;">
-        We are facing slower response time !
-      </h4>
-    </div>
+    <promotion-banner />
     <div id="fs_control">
       <div class="panel panel-default">
         <div class="headPanel panel-heading">
