@@ -199,6 +199,9 @@ export default new Vuex.Store({
           })
       ]).then(([langs, code]) => {
         commit("changeLanguage", code ? code.language : "cpp");
+        if (code.code) {
+          commit("setCode", code.code);
+        }
         return [langs, code];
       });
     },
