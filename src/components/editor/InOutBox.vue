@@ -3,6 +3,11 @@
     <div class="panel-input panel-default">
       <div class="panel-heading">
         <span>Input</span>
+        <input type="file" ref="inputFileUpload" style="display:none" @change="uploadInput">
+        <button type="button" id="uploadInputFile" class=" btn btn-sm btn-menu" @click="selectInputFile">
+          <span class="fa fa-folder-open" aria-hidden="true"></span>
+        </button>
+        <input type="file" id="inputUpload" style="display:none;">
         <a v-on:click="onCopyInput" id="copy-input"> 
           <i class="fa fa-paperclip" />
         </a>
@@ -86,7 +91,29 @@
           })
           console.error(e)
         })
-      }
+      },
+      selectInputFile() {
+        // open file select dialogue
+        this.$refs.inputFileUpload.click()
+      },
+      uploadInput(e) {
+        const files = e.target.files || e.dataTransfer.files
+        if (!files.length) {
+          return
+        }
+        const file = files[0]
+        const reader = new FileReader()
+        reader.onload = (e) => {
+          console.log('Uploaded File: ' + file.name)
+          this.$notify({
+            text: 'Code Uploaded Successfully',
+            type: 'success'
+          })
+          this.$store.commit('uploadInput', e.target.result)
+          this.$refs.inputFileUpload.value = ""
+        }
+        reader.readAsText(file)
+      },
     }
   }
 </script>
@@ -161,7 +188,7 @@
     cursor: pointer;
   }
 
-  #copy-input, #copy-output {
+  #uploadInputFile, #copy-output {
     margin-left: auto;
   }
 </style>
