@@ -1,5 +1,5 @@
 <template>
-  <div id="shareId" class="btn-group">
+  <div id="shareId" class="btn-group" v-on:keyup.esc="showShareModal=false">
     <button id="shareButton" type="button" class="btn btn-sm btn-menu" @click="getURL">
       Share<i class="fa fa-reply-all" aria-hidden="true"></i>
     </button>
