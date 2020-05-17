@@ -1631,16 +1631,10 @@ padding-top:45px !important;
   }
 }
 
-
-@media (min-width: 893px) and (max-width: 1200px) {
-  .headPanel{
-    height: 120px !important;
-  }
-}
-
 .headPanel.fullscreen{
   height:55px !important;
 }
+
 @media (max-width: 394px){
   .panelTopOptions{
     margin-bottom: 30px;
