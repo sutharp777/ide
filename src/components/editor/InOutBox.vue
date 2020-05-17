@@ -18,6 +18,9 @@
     <div class="panel-output panel-default">
       <div class="panel-heading">
         <span>Output</span>
+        <button type="button" id="downloadOutput" class="btn btn-sm btn-menu" @click="downloadOutput()">
+          <i class="fa fa-download" aria-hidden="true"></i>
+        </button>
         <a v-on:click="onCopyOutput" id="copy-output"> 
           <i class="fa fa-paperclip"/>
         </a>
@@ -28,6 +31,7 @@
 </template>
 
 <script>
+  import * as download from 'downloadjs'
   export default {
     name: 'inoutbox',
     mounted() {
@@ -107,6 +111,10 @@
           this.$refs.inputFileUpload.value = ""
         }
         reader.readAsText(file)
+      },
+      downloadOutput() {
+        const output = this.$store.state.output;
+        download(`data:text/plain;charset=utf-8,${encodeURIComponent(output)}`, "output.txt", 'text/plain')
       },
     }
   }
