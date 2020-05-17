@@ -36,6 +36,12 @@
                 </li>
 
                 <li>
+                  <button type="button" id="save" class="btn btn-sm btn-menu" @click="saveToServer()">
+                    Save <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                  </button>
+                </li>
+
+                <li>
                   <button type="button" id="download" class="btn btn-sm btn-menu" @click="showDownloadModal()">
                     Download <i class="fa fa-download" aria-hidden="true"></i>
                   </button>
@@ -55,7 +61,7 @@
                       aria-haspopup="true" aria-expanded="false" @blur="viewOptionClose" >
                 view
                 <span class="fa fa-caret-down"></span>
-                <span class="fa fa-eye" aria-hidden="true"><span>
+                <span class="fa fa-eye" aria-hidden="true"></span>
               </button>
 
               <ul class="dropdown-menu">
