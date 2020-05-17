@@ -3,6 +3,9 @@
     <div class="panel-input panel-default">
       <div class="panel-heading">
         <span>Input</span>
+        <label id="uploadInputFile" ><span class="fa fa-folder-open" style="margin-left: 5px" aria-hidden="true"></span>
+          <input type="file" ref="inputFileUpload" style="display:none" @change="uploadInput">
+        </label>
         <a v-on:click="onCopyInput" id="copy-input"> 
           <i class="fa fa-paperclip" />
         </a>
@@ -61,7 +64,7 @@
     },
     methods: {
       customInputChange(e) {
-        this.$store.commit('changeCustomInput', e.target.value)
+        this.$store.commit('changeCustomInput', e.target.value || e.target.result)
       },
       onCopyInput(e) {
         this.$copyText(this.$store.state.customInput).then((e) => {
@@ -90,6 +93,24 @@
           })
           console.error(e)
         })
+      },
+      uploadInput(e) {
+        const files = e.target.files || e.dataTransfer.files
+        if (!files.length) {
+          return
+        }
+        const file = files[0]
+        const reader = new FileReader()
+        reader.onload = (e) => {
+          console.log('Uploaded File: ' + file.name)
+          this.$notify({
+            text: 'Input Uploaded Successfully',
+            type: 'success'
+          })
+          this.customInputChange(e)
+          this.$refs.inputFileUpload.value = ""
+        }
+        reader.readAsText(file)
       },
       downloadOutput() {
         const output = this.$store.state.output;
@@ -169,7 +190,12 @@
     cursor: pointer;
   }
 
-  #copy-input, #downloadOutput {
+  #uploadInputFile{
+    margin: 0px 0px 0px auto;
+    padding: 0 10px;
+    cursor: pointer;
+  } 
+  #downloadOutput {
     margin-left: auto;
   }
 </style>
