@@ -195,7 +195,7 @@
     padding: 0 10px;
     cursor: pointer;
   } 
-  #copy-output {
+  #downloadOutput {
     margin-left: auto;
   }
 </style>

@@ -96,9 +96,6 @@ export default new Vuex.Store({
     changeCustomInput(state, val) {
       state.customInput = val;
     },
-    uploadInput(state, val){
-      state.customInput = val;
-    },
     changeTheme(state, val) {
       state.theme = val;
     },
