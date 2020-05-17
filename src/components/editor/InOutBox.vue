@@ -3,11 +3,9 @@
     <div class="panel-input panel-default">
       <div class="panel-heading">
         <span>Input</span>
-        <input type="file" ref="inputFileUpload" style="display:none" @change="uploadInput">
-        <button type="button" id="uploadInputFile" class=" btn btn-sm btn-menu" @click="selectInputFile">
-          <span class="fa fa-folder-open" aria-hidden="true"></span>
-        </button>
-        <input type="file" id="inputUpload" style="display:none;">
+        <label id="uploadInputFile" ><span class="fa fa-folder-open" style="margin-left: 5px" aria-hidden="true"></span>
+          <input type="file" ref="inputFileUpload" style="display:none" @change="uploadInput">
+        </label>
         <a v-on:click="onCopyInput" id="copy-input"> 
           <i class="fa fa-paperclip" />
         </a>
@@ -62,7 +60,7 @@
     },
     methods: {
       customInputChange(e) {
-        this.$store.commit('changeCustomInput', e.target.value)
+        this.$store.commit('changeCustomInput', e.target.value || e.target.result)
       },
       onCopyInput(e) {
         this.$copyText(this.$store.state.customInput).then((e) => {
@@ -92,10 +90,6 @@
           console.error(e)
         })
       },
-      selectInputFile() {
-        // open file select dialogue
-        this.$refs.inputFileUpload.click()
-      },
       uploadInput(e) {
         const files = e.target.files || e.dataTransfer.files
         if (!files.length) {
@@ -106,10 +100,10 @@
         reader.onload = (e) => {
           console.log('Uploaded File: ' + file.name)
           this.$notify({
-            text: 'Code Uploaded Successfully',
+            text: 'Input Uploaded Successfully',
             type: 'success'
           })
-          this.$store.commit('uploadInput', e.target.result)
+          this.customInputChange(e)
           this.$refs.inputFileUpload.value = ""
         }
         reader.readAsText(file)
@@ -188,7 +182,12 @@
     cursor: pointer;
   }
 
-  #uploadInputFile, #copy-output {
+  #uploadInputFile{
+    margin: 0px 0px 0px auto;
+    padding: 0 10px;
+    cursor: pointer;
+  } 
+  #copy-output {
     margin-left: auto;
   }
 </style>
