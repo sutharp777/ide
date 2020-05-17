@@ -11,35 +11,69 @@
               <span v-if="loading">Running</span>
               <span v-else> Run </span>
             </button>
-            <language :options=languages :selected=selectedLang></language>
 
-            <button class="btn btn-sm btn-menu">
-            <router-link class="decoration-none" to="/" target="_blank" active-class="" exact-active-class="">
-              New <i class="fa fa-file-code-o" aria-hidden="true"></i>
-            </router-link>
-            </button>
+            <language :options=languages :selected=selectedLang></language>
 
             <button type="button" id="custInp" class="btn btn-sm btn-menu" @click="InOutBoxToggle()">
               Input <i class="fa fa-keyboard-o" aria-hidden="true"></i>
             </button>
-            <button type="button" id="save" class="btn btn-sm btn-menu" @click="saveToServer()">Save <i
-              class="fa fa-floppy-o" aria-hidden="true"></i></button>
-            <button type="button" id="download" class="btn btn-sm btn-menu" @click="showDownloadModal()">
-              Download
-              <i class="fa fa-download" aria-hidden="true"></i>
-            </button>
-            <input type="file" ref="fileUpload" style="display:none" @change="uploadCode">
-            <button type="button" id="uploadFile" class=" btn btn-sm btn-menu" @click="selectFile">
-              Upload <span class="fa fa-folder-open" aria-hidden="true"></span>
-            </button>
+
+            <div class="btn-group" :class="{ fileOptionOpen : isFileOptionOpen}"  @click="fileOptionOpen">
+              <button id="panelLang" type="button" class="btn btn-sm btn-menu"
+                      aria-haspopup="true" aria-expanded="false" @blur="fileOptionClose" >
+                file
+                <span class="fa fa-caret-down"></span>
+                <span class="fa fa-file-code-o"></span>
+              </button>
+
+              <ul class="dropdown-menu">
+                <li>
+                  <button class="btn btn-sm btn-menu">
+                  <router-link class="decoration-none" to="/" target="_blank" active-class="" exact-active-class="">
+                    New <i class="fa fa-file-code-o" aria-hidden="true"></i>
+                  </router-link>
+                  </button>
+                </li>
+
+                <li>
+                  <button type="button" id="download" class="btn btn-sm btn-menu" @click="showDownloadModal()">
+                    Download <i class="fa fa-download" aria-hidden="true"></i>
+                  </button>
+                </li>
+                
+                <li>
+                  <input type="file" ref="fileUpload" style="display:none" @change="uploadCode">
+                  <button type="button" id="uploadFile" class=" btn btn-sm btn-menu" @click="selectFile">
+                    Upload <span class="fa fa-folder-open" aria-hidden="true"></span>
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+            <div class="btn-group" :class="{viewOptionOpen : isViewOptionOpen}"  @click="viewOptionOpen">
+              <button id="panelLang" type="button" class="btn btn-sm btn-menu"
+                      aria-haspopup="true" aria-expanded="false" @blur="viewOptionClose" >
+                view
+                <span class="fa fa-caret-down"></span>
+                <span class="fa fa-eye" aria-hidden="true"><span>
+              </button>
+
+              <ul class="dropdown-menu">
+                <li>
+                  <button type="button" id="settingButton" class="btn btn-sm btn-menu" @click="settingsToggle">
+                    Settings <span class="fa fa-cog"></span>
+                  </button>
+                </li>
+                  <button id="panelLang" type="button" class="btn btn-sm btn-menu" @click="showShortcutsModal()">
+                    Shortcuts <i class="fa fa-reply-all" aria-hidden="true"></i>
+                  </button>
+                <li>
+                </li>
+              </ul>
+            </div>
+
             <input type="file" id="upload" style="display:none;">
-            <button type="button" id="settingButton" class="btn btn-sm btn-menu" @click="settingsToggle">
-              Setting <span class="fa fa-cog"></span>
-            </button>
             <share></share>
-            <button id="panelLang" type="button" class="btn btn-sm btn-menu" @click="showShortcutsModal()">
-              Shortcuts <i class="fa fa-reply-all" aria-hidden="true"></i>
-            </button>
           </div>
           <div class="logoMenu">
             <login-button></login-button>
@@ -130,7 +164,9 @@
         fullscreen: false,
         loading: false,
         fileName: this.$store.state.fileName,
-        showBanner: true
+        showBanner: true,
+        isFileOptionOpen: false,
+        isViewOptionOpen: false
       }
     },
     computed: {
@@ -266,7 +302,19 @@
       },
       changeTitle (e) {
         this.$store.commit('setCodeTitle', e.target.value)
-      }
+      },
+      fileOptionOpen() {
+        this.isFileOptionOpen = !this.isFileOptionOpen
+      },
+      fileOptionClose () {
+        setTimeout(() => { this.isFileOptionOpen=false },250 )
+      },
+      viewOptionOpen() {
+        this.isViewOptionOpen = !this.isViewOptionOpen
+      },
+      viewOptionClose () {
+        setTimeout(() => { this.isViewOptionOpen=false}, 250 )
+      },
     }
   }
 </script>
@@ -307,6 +355,20 @@
       display: none;
     }
   }
+
+  .fileOptionOpen > .dropdown-menu {
+    display: list-item !important;
+    background-color: #202020;
+    font-size: 14px;
+    overflow: hidden;
+  }
+  
+  .viewOptionOpen > .dropdown-menu {
+    display: list-item !important;
+    background-color: #202020;
+    font-size: 14px;
+    overflow: hidden;
+  }
 </style>
 
 <style>
@@ -346,6 +408,19 @@
     border-radius: 3px !important;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
     transition: all .3s ease;
+  }
+
+  .key-span {
+    color: #555;
+    text-align: center;
+    background-color: #eee;
+    display: inline-block;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 0 #fff, 0 1px 0 #ccc;
+    font-size: 20px;
+    padding: 4px 8px;
+    margin: 0 8px;
     font-family: Helvetica, Arial, sans-serif;
   }
 
