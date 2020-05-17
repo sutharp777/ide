@@ -14,6 +14,12 @@
         </select>
       </div>
       <div class="btn-group">
+        <b>Tab Size:</b>
+        <select @change="changeTabSize">
+          <option v-for="tabSize in tabSizeOptions" :value="tabSize" :selected="setDefault('tabSize', tabSize)">{{tabSize}}</option>
+        </select>
+      </div>
+      <div class="btn-group">
         <b>Theme:</b>
         <select @change="changeTheme">
           <option v-for="theme in themeOptions" :value="theme" :selected="setDefault('theme', theme)">{{themeOptionsMap[theme]}}</option>
@@ -39,6 +45,7 @@
         },
         fontOptions: ['Lucida Console', 'Anonymous Pro', 'Courier', 'Droid Sans Mono', 'Inconsolata', 'Source Code Pro', 'Ubuntu Mono'],
         sizeOptions: Array(30).fill(0).map((el, ind) => 6 + (2 * ind)),
+        tabSizeOptions: [2, 4, 8]
       }
     },
     methods: {
@@ -51,6 +58,9 @@
       changeSize (e) {
         this.$store.commit('changeFontSize', e.target.value)
       },
+      changeTabSize (e) {
+        this.$store.commit('changeTabSize', e.target.value)
+      },
       resetEditor () {
         this.$store.commit('resetEditor')
       },
@@ -60,6 +70,8 @@
             return val === this.$store.state.theme
           case 'size':
             return val === parseInt(this.$store.state.fontSize)
+          case 'tabSize':
+            return val === parseInt(this.$store.state.tabSize)
           case 'font':
             return val === this.$store.state.font
         }

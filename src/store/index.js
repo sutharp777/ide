@@ -40,6 +40,7 @@ export default new Vuex.Store({
     theme: "vs-dark",
     font: "Ubuntu Mono",
     fontSize: 16,
+    tabSize: 4,
     showInOutBox: false,
     showSettings: false,
     customInput: "",
@@ -105,6 +106,9 @@ export default new Vuex.Store({
     changeFontSize(state, val) {
       state.fontSize = val;
     },
+    changeTabSize(state, val) {
+      state.tabSize = val;
+    },
     setCheckData(state, val = "") {
       state.checkData = shajs("sha256")
         .update(val)
@@ -114,6 +118,7 @@ export default new Vuex.Store({
       state.theme = "vs-dark";
       state.font = "Ubuntu Mono";
       state.fontSize = 16;
+      state.tabSize = 4;
     },
     resetCode(state) {
       state.code[state.language] = samples[state.language];
@@ -136,7 +141,7 @@ export default new Vuex.Store({
     new VuexPersistence({
       storage: window.localStorage,
       reducer: function(state) {
-        const included = ["user", "showInOutBox", "showSettings", "font", "fontSize"];
+        const included = ["user", "showInOutBox", "showSettings", "font", "fontSize", "tabSize"];
         console.log(state);
         return Object.keys(state)
           .filter(key => included.includes(key))

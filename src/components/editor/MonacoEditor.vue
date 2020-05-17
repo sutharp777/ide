@@ -36,6 +36,7 @@
           dragAndDrop: true,
           fontFamily: this.$store.state.font,
           fontSize: this.$store.state.fontSize,
+          tabSize: this.$store.state.tabSize,
           parameterHints: true,
           renderIndentGuides: true,
           lineNumbersMinChars: 3,
@@ -69,11 +70,20 @@
               fontSize: this.$store.state.fontSize
             })
             break;
+          case "changeTabSize":
+            this.editor.getModel().updateOptions({
+              tabSize: this.$store.state.tabSize
+            })
+            this.editor.focus()
+            break;
           case "resetEditor":
             monaco.editor.setTheme(this.$store.state.theme);
             this.editor.updateOptions({
               fontFamily: this.$store.state.font,
               fontSize: this.$store.state.fontSize
+            })
+            this.editor.getModel().updateOptions({
+              tabSize: this.$store.state.tabSize
             })
             break;
           case "firebase/enablePairMode": 
