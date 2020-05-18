@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper" @keydown="keyShortCuts">
+  <div class="wrapper">
     <promotion-banner />
     <div id="fs_control">
       <div class="panel panel-default">
@@ -143,11 +143,11 @@
         </li>
         <li class="key-unit flex-space-between">
           <span class="key-span flex-center">Ctrl + S</span>
-          <span class="key-description">To download the code in windows/linux</span>
+          <span class="key-description">To save the code in windows/linux</span>
         </li>
         <li class="key-unit flex-space-between">
           <span class="key-span flex-center">⌘ + S</span>
-          <span class="key-description">To download the code in mac</span>
+          <span class="key-description">To save the code in mac</span>
         </li>
       </ul>
     </modal>
@@ -174,6 +174,9 @@
         isFileOptionOpen: false,
         isViewOptionOpen: false
       }
+    },
+    mounted() {
+      document.addEventListener('keydown', this.keyShortCuts);
     },
     computed: {
       languages() {
@@ -299,7 +302,7 @@
         }
         if(isMetaOrCtrlDown && e.keyCode === 83) {
           e.preventDefault()
-          this.showDownloadModal()
+          this.saveToServer()
         }
         if(isMetaOrCtrlDown && e.keyCode === 66) {
           e.preventDefault()
