@@ -280,6 +280,19 @@
     }
   }
 
+  @media (min-width: 1375px) {
+    .verticalPane#inoutbox {
+      max-width: 550px;
+      left: calc(100vw - 550px);
+    }
+    .verticalPane #output, .verticalPane #test-input {
+      width: 100%;
+    }
+    .verticalPane .panel-heading, .verticalPane .panel-input, .verticalPane .panel-output {
+      width: 100%;
+    }
+  }
+
   i.fa:hover {
     cursor: pointer;
   }

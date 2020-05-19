@@ -167,8 +167,13 @@
   }
   @media (min-width: 767px) {
     .verticalPane#editor {
-      max-width: (100vw - 550px);
       width: 60vw;
+    }
+  }
+  @media (min-width: 1375px) {
+    .verticalPane#editor {
+      width: 100vw;
+      max-width: calc(100vw - 550px);
     }
   }
   .inputarea {
