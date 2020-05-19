@@ -55,6 +55,12 @@ const js_sample =
 
 const ruby_sample = 'puts "Hello World!";'
 
+const rust_sample =
+  'fn main() {\n' +
+  '  println!("Hello, world!");\n' +
+  '}\n';
+
+
 const lang_samples = {
   'c': c_sample,
   'cpp': cpp_sample,
@@ -65,7 +71,8 @@ const lang_samples = {
   'jsv': js_sample,
   'nodejs8': js_sample,
   'nodejs10': js_sample,
-  'ruby': ruby_sample
+  'ruby': ruby_sample,
+  'rust': rust_sample
 };
 
 export default lang_samples
