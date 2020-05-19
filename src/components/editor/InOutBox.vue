@@ -295,6 +295,17 @@
 
   i.fa:hover {
     cursor: pointer;
+    color: red;
+  }
+  i.fa:focus {
+    color: red;
+  }
+  span.fa:hover {
+    cursor: pointer;
+    color: red;
+  }
+  span.fa:focus {
+    color: red;
   }
 
   .open > .dropdown-menu {
@@ -317,3 +328,4 @@
     margin-left: auto;
   }
 </style>
+
