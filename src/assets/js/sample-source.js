@@ -64,7 +64,7 @@ const rust_sample =
 const lang_samples = {
   'c': c_sample,
   'cpp': cpp_sample,
-  'c#': csharp_sample,
+  'csharp': csharp_sample,
   'java8': java_sample,
   'py2': py2_sample,
   'py3': py3_sample,
