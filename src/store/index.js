@@ -53,13 +53,17 @@ export default new Vuex.Store({
     checkData: "",
     codeId: null,
     codeTitle: "",
-    submissionId: null
+    submissionId: null,
+    isVertical: false
   },
   modules: {
     user: userModule,
     firebase: firebaseModule
   },
   mutations: {
+    shiftInOutBox(state) {
+      state.isVertical = !state.isVertical
+    },
     toggleInOutBox(state) {
       state.showInOutBox = !state.showInOutBox;
     },
@@ -141,7 +145,7 @@ export default new Vuex.Store({
     new VuexPersistence({
       storage: window.localStorage,
       reducer: function(state) {
-        const included = ["user", "showInOutBox", "showSettings", "font", "fontSize", "tabSize"];
+        const included = ["user", "showInOutBox", "isVertical", "showSettings", "font", "fontSize", "tabSize"];
         console.log(state);
         return Object.keys(state)
           .filter(key => included.includes(key))

@@ -1,5 +1,6 @@
 <template>
-  <div id="inoutbox" class="fsHide" v-bind:style="{ fontSize: this.$store.state.fontSize + 'px' }" v-show="this.$store.state.showInOutBox">
+  <div id="inoutbox" :class="{ verticalPane : this.$store.state.isVertical, resizable : !this.$store.state.isVertical}" 
+    class="fsHide" v-bind:style="{ fontSize: this.$store.state.fontSize + 'px' }" v-show="this.$store.state.showInOutBox">
     <div class="panel-input panel-default">
       <div class="panel-heading">
         <span>Input</span>
@@ -9,6 +10,23 @@
         <a v-on:click="onCopyInput" id="copy-input"> 
           <i class="fa fa-paperclip" />
         </a>
+        <button v-if="this.$store.state.isVertical" type="button" id="toggleHorizontalPane" class="btn btn-sm btn-menu" 
+          :class="{ open : isOpen}" @click="open" @blur="close">
+          <i class="fa fa-ellipsis-v" aria-hidden="true" style="font-size:14px"></i>
+          <ul class="dropdown-menu">
+            <li>
+              <button type="button" class="btn btn-sm btn-menu" @click="shiftInOutBox">
+                Dock to bottom
+              </button>
+            </li>
+            <li>
+              <button type="button" class="btn btn-sm btn-menu" @click="close">
+                Dock to right
+                <i class="fa fa-check" aria-hidden="true"></i>
+              </button>
+            </li>
+          </ul>
+        </button>
       </div>
       <textarea class="textbox" id="test-input" rows="2" wrap="off"
                 placeholder="Specify Input" :value="this.$store.state.customInput"
@@ -24,6 +42,23 @@
         <a v-on:click="onCopyOutput" id="copy-output"> 
           <i class="fa fa-paperclip"/>
         </a>
+        <button v-if="!this.$store.state.isVertical" type="button" id="toggleVerticalPane" class="btn btn-sm btn-menu" 
+          :class="{ open : isOpen}" @click="open" @blur="close">
+          <i class="fa fa-ellipsis-v" aria-hidden="true" style="font-size:14px"></i>
+          <ul class="dropdown-menu">
+            <li>
+              <button type="button" class="btn btn-sm btn-menu" @click="close">
+                Dock to bottom
+                <i class="fa fa-check" aria-hidden="true"></i>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="btn btn-sm btn-menu" @click="shiftInOutBox">
+                Dock to right
+              </button>
+            </li>
+          </ul>
+        </button>
       </div>
       <pre id="output">{{this.$store.state.output}}</pre>
     </div>
@@ -34,8 +69,13 @@
   import * as download from 'downloadjs'
   export default {
     name: 'inoutbox',
+    data() {
+      return {
+        isOpen: false
+      }
+    },
     mounted() {
-      interact('#inoutbox')
+      interact('#inoutbox.resizable')
         .resizable({
           edges: { top: true },
           restrictEdges: {
@@ -63,6 +103,15 @@
       })
     },
     methods: {
+      shiftInOutBox() {
+        this.$store.commit('shiftInOutBox')
+      },
+      open() {
+        this.isOpen = !this.isOpen
+      },
+      close() {
+        setTimeout(() => { this.isOpen=false },250 )
+      },
       customInputChange(e) {
         this.$store.commit('changeCustomInput', e.target.value || e.target.result)
       },
@@ -174,7 +223,15 @@
     right: 14px;
   }
 
+  #toggleVerticalPane {
+    display: none;
+  }
+
    @media (max-width: 767px) {
+    #toggleHorizontalPane {
+      display: none;
+    }
+
     .panel-heading, .panel-input, .panel-output, #output, #test-input {
       width: calc(100vw - 14px);
     }
@@ -186,8 +243,56 @@
     }
   }
 
+  @media (min-width: 767px) {
+    #toggleVerticalPane {
+      display: inline-block;
+    }
+
+    .verticalPane#inoutbox {
+      height: calc(100vh - 90px) !important;
+      width: 100vw;
+      position: relative;
+      right: 0;
+      left: 5px;
+      top: calc(-100vh + 85px);
+      z-index: 9;
+      left: 5px;
+    }
+
+    .verticalPane #output, .verticalPane #test-input {
+      width: calc(40vw - 5px);
+    }
+
+    .verticalPane .panel-heading, .verticalPane .panel-input, .verticalPane .panel-output {
+      width: calc(40vw + 4px);
+    }
+
+    .verticalPane .panel-input, .verticalPane .panel-output {
+      bottom: auto;
+      top: 0;
+      right: 0;
+      height: 50% !important;
+    }
+
+    .verticalPane .panel-output {
+      top: auto;
+      bottom: 0;
+    }
+  }
+
   i.fa:hover {
     cursor: pointer;
+  }
+
+  .open > .dropdown-menu {
+    display: list-item !important;
+    background-color: #202020;
+    font-size: 14px;
+    overflow: hidden;
+    top: 35px;
+    right: 25px;
+    width: 20%;
+    left: auto;
   }
 
   #uploadInputFile{
