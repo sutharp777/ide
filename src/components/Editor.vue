@@ -6,6 +6,9 @@
         </menuBar>
         <monaco-editor></monaco-editor>
       </div>
+      <div class="panel-heading status-bar">
+        <input id="file-name-input" class="black" type="text" placeholder="Untitled" :value=this.$store.state.codeTitle @change=changeTitle>
+      </div>
       <inoutbox></inoutbox>
     </div>
   </div>
@@ -35,6 +38,11 @@
           alert('This live code link is no longer valid')
           this.$router.push('/')
         })
+      }
+    },
+    methods: {
+      changeTitle(e) {
+        this.$store.commit('setCodeTitle', e.target.value)
       }
     }
   }
@@ -70,5 +78,18 @@
 
   .btn i {
     font-size: 12px;
+  }
+
+  .status-bar {
+    padding: 0px 25px !important;
+    font-family: sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    border-top: 1px solid #1e1e1e;
+    width: 100%;
+  }
+
+  .status-bar #file-name-input {
+    font-style: italic;
   }
 </style>

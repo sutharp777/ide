@@ -29,7 +29,7 @@
         </button>
       </div>
       <textarea class="textbox" id="test-input" rows="2" wrap="off"
-                placeholder="Specify Input" :value="this.$store.state.customInput"
+                placeholder="Enter Input" :value="this.$store.state.customInput"
                 @change="customInputChange">
       </textarea>
     </div>
@@ -174,7 +174,7 @@
     position: fixed;
     width: 100vw;
     height: 210px;
-    bottom: 0;
+    bottom: 20px;
     left: 0;
     z-index: 20;
   }
@@ -249,12 +249,12 @@
     }
 
     .verticalPane#inoutbox {
-      height: calc(100vh - 90px) !important;
+      height: calc(100vh - 70px) !important;
       width: 100vw;
       position: relative;
       right: 0;
       left: 5px;
-      top: calc(-100vh + 85px);
+      top: calc(-100vh + 15px);
       z-index: 9;
       left: 5px;
     }

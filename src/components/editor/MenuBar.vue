@@ -87,9 +87,6 @@
             <a href="https://codingblocks.com/" target="_blank"><img src="../../assets/cb_logo_light.png"></a>
           </div>
         </div>
-        <div class="panel-heading second-row">
-          Title: <input class="black" type="text" placeholder="Untitled" :value=this.$store.state.codeTitle @change=changeTitle>
-        </div>
       </div>
       <settings v-show="this.$store.state.showSettings"></settings>
     </div>
@@ -309,9 +306,6 @@
           this.$store.commit('resetCode', this.$store.state.language)
         }
       },
-      changeTitle (e) {
-        this.$store.commit('setCodeTitle', e.target.value)
-      },
       fileOptionOpen() {
         this.isFileOptionOpen = !this.isFileOptionOpen
       },
@@ -385,6 +379,10 @@
     background: #e31d3b;
     border-radius: 50px !important;
     color: white !important;
+    height: 35px;
+  }
+  .panel panel-default {
+    padding-top: 5px;
   }
 
   .btn-run:hover, .btn-run:focus, .btn-run:active {
@@ -619,15 +617,6 @@
   }
   .decoration-none:hover {
     color: #fc4f4f
-  }
-  .second-row {
-    padding: 0px 25px !important;
-    font-family: sans-serif;
-    font-weight: 600;
-    font-size: 1.05rem;
-  }
-  .second-row input {
-    margin-bottom: 5px;
   }
   .times {
     position: absolute;

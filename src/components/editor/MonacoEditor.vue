@@ -158,12 +158,12 @@
     overflow: hidden;
     position: relative;
     border: none;
-    height: calc(100vh - 40px);
+    height: calc(100vh - 60px);
     width: 100vw;
     z-index: 10;
     margin: 0;
     border-radius: 0;
-    padding-top: 35px;
+    padding-top: 0!important;
   }
   @media (min-width: 767px) {
     .verticalPane#editor {
