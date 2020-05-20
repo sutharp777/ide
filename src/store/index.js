@@ -145,7 +145,7 @@ export default new Vuex.Store({
     new VuexPersistence({
       storage: window.localStorage,
       reducer: function(state) {
-        const included = ["user", "showInOutBox", "isVertical", "showSettings", "font", "fontSize", "tabSize"];
+        const included = ["user", "showInOutBox", "isVertical", "showSettings", "font", "fontSize", "tabSize", "language"];
         console.log(state);
         return Object.keys(state)
           .filter(key => included.includes(key))
