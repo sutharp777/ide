@@ -55,6 +55,11 @@ const js_sample =
 
 const ruby_sample = 'puts "Hello World!";'
 
+const kotlin_sample = 
+  'fun main(args: Array<String>) {\n' +
+  '  println("Hello World")\n' +
+  '}\n'
+
 const rust_sample =
   'fn main() {\n' +
   '  println!("Hello, world!");\n' +
@@ -72,7 +77,8 @@ const lang_samples = {
   'nodejs8': js_sample,
   'nodejs10': js_sample,
   'ruby': ruby_sample,
-  'rust': rust_sample
+  'rust': rust_sample,
+  'kotlin': kotlin_sample
 };
 
 export default lang_samples
