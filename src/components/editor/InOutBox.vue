@@ -315,8 +315,9 @@
     overflow: hidden;
     top: 35px;
     right: 25px;
-    width: 20%;
     left: auto;
+    width: 180px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   }
 
   #uploadInputFile{
