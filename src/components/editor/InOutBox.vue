@@ -329,3 +329,8 @@
   }
 </style>
 
+<style>
+  .vue-notification {
+    margin-top: 45px;
+  }
+</style>

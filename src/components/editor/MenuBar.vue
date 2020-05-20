@@ -624,4 +624,8 @@
     cursor: pointer;
     top: 10px
   }
+
+  .vue-notification {
+    margin-top: 45px;
+  }
 </style>
