@@ -16,12 +16,12 @@
           <ul class="dropdown-menu">
             <li>
               <button type="button" class="btn btn-sm btn-menu" @click="shiftInOutBox">
-                Dock to bottom
+                <i class="fa fa-window-maximize fa-rotate-180" style="margin-right: 4px"></i>Dock to bottom
               </button>
             </li>
             <li>
               <button type="button" class="btn btn-sm btn-menu" @click="close">
-                Dock to right
+                <i class="fa fa-window-maximize fa-rotate-90" style="margin-right: 4px"></i>Dock to right
                 <i class="fa fa-check" aria-hidden="true"></i>
               </button>
             </li>
@@ -48,13 +48,13 @@
           <ul class="dropdown-menu">
             <li>
               <button type="button" class="btn btn-sm btn-menu" @click="close">
-                Dock to bottom
+                <i class="fa fa-window-maximize fa-rotate-180" style="margin-right: 4px"></i>Dock to bottom
                 <i class="fa fa-check" aria-hidden="true"></i>
               </button>
             </li>
             <li>
               <button type="button" class="btn btn-sm btn-menu" @click="shiftInOutBox">
-                Dock to right
+                <i class="fa fa-window-maximize fa-rotate-90" style="margin-right: 4px"></i>Dock to right
               </button>
             </li>
           </ul>
