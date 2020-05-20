@@ -16,8 +16,7 @@
     'jsv': 'javascript',
     'nodejs8': 'javascript',
     'nodejs10': 'javascript',
-    'ruby': 'ruby',
-    'kotlin': 'kotlin'
+    'ruby': 'ruby'
   }
 
   export default {
