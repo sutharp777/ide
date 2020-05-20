@@ -9,7 +9,7 @@
   const langModes = {
     'c': 'c',
     'cpp': 'cpp',
-    'c#': 'csharp',
+    'csharp': 'csharp',
     'java8': 'java',
     'py2': 'python',
     'py3': 'python',
