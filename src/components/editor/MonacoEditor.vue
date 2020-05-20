@@ -17,7 +17,8 @@
     'nodejs8': 'javascript',
     'nodejs10': 'javascript',
     'ruby': 'ruby',
-    'kotlin': 'kotlin'
+    'kotlin': 'kotlin',
+    'go': 'go',
   }
 
   export default {
