@@ -9,7 +9,7 @@
   const langModes = {
     'c': 'c',
     'cpp': 'cpp',
-    'c#': 'csharp',
+    'csharp': 'csharp',
     'java8': 'java',
     'py2': 'python',
     'py3': 'python',
@@ -17,8 +17,7 @@
     'nodejs8': 'javascript',
     'nodejs10': 'javascript',
     'ruby': 'ruby',
-    'kotlin': 'kotlin',
-    'golang': 'go',
+    'golang': 'go'
   }
 
   export default {
