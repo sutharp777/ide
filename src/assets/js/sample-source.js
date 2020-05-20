@@ -85,7 +85,7 @@ const lang_samples = {
   'ruby': ruby_sample,
   'rust': rust_sample,
   'kotlin': kotlin_sample,
-  'go': go_sample
+  'golang': go_sample
 };
 
 export default lang_samples

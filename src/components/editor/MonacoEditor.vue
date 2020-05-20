@@ -18,7 +18,7 @@
     'nodejs10': 'javascript',
     'ruby': 'ruby',
     'kotlin': 'kotlin',
-    'go': 'go',
+    'golang': 'go',
   }
 
   export default {
