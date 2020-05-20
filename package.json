@@ -21,7 +21,7 @@
     "loader-utils": "^1.1.0",
     "moment": "^2.22.2",
     "monaco-editor": "^0.20.0",
-    "monaco-editor-webpack-plugin": "^1.7.0",
+    "monaco-editor-webpack-plugin": "^1.9.0",
     "vue": "^2.5.16",
     "vue-clipboard2": "^0.2.0",
     "vue-fullscreen": "^2.1.3",
