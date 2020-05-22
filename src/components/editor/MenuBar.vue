@@ -36,13 +36,13 @@
                 </li>
 
                 <li>
-                  <button type="button" id="save" class="btn btn-sm btn-menu" @click="saveToServer()">
+                  <button type="button" id="save" class="btn btn-sm btn-menu" @click="checkToShowSaveModal()">
                     Save <i class="fa fa-floppy-o" aria-hidden="true"></i>
                   </button>
                 </li>
 
                 <li>
-                  <button type="button" id="download" class="btn btn-sm btn-menu" @click="showDownloadModal()">
+                  <button type="button" id="download" class="btn btn-sm btn-menu" @click="checkToShowDownloadModal()">
                     Download <i class="fa fa-download" aria-hidden="true"></i>
                   </button>
                 </li>
@@ -97,14 +97,25 @@
       </div>
       <div class="download-modal-content flex-center">
         <span>File Name:</span>
-        <input v-on:keyup.enter="downloadCode" v-on:change="updateFileName" 
+        <input v-on:keyup.enter="downloadCode" v-on:change="saveFileName" 
               ref="fileName" :value="this.$store.state.fileName" placeholder="Enter File name">
       </div>
       <div class="download-modal-button-set flex-space-between">
-        <button class="modal-button" @click="closeDownloadModal()">close</button>
-        <button class="modal-button" @click="resetFileName()">reset file name</button>
-        <button class="modal-button" @click="saveFileName()">save file name</button>
-        <button class="modal-button" @click="downloadCode()">download code</button>
+        <button class="modal-button" @click="downloadCode()">Download</button>
+      </div>
+    </modal>
+
+    <modal name="save-modal" transition="pop-out" :width="680" :pivot-y="0.2" :height="auto">
+      <div class="save-modal-title flex-center">
+        Confirm File name
+      </div>
+      <div class="save-modal-content flex-center">
+        <span>File Name:</span>
+        <input v-on:keyup.enter="saveToServer" v-on:change="saveFileName" 
+              :value="this.$store.state.fileName" placeholder="Enter File name">
+      </div>
+      <div class="save-modal-button-set flex-space-between">
+        <button class="modal-button" @click="saveToServer()">Save</button>
       </div>
     </modal>
 
@@ -169,11 +180,23 @@
         fileName: this.$store.state.fileName,
         showBanner: true,
         isFileOptionOpen: false,
-        isViewOptionOpen: false
+        isViewOptionOpen: false,
+        def: {
+          target:{
+            value: this.$store.state.fileName
+          }
+        }
       }
     },
     mounted() {
       document.addEventListener('keydown', this.keyShortCuts);
+      this.$store.commit('changeLanguage', this.$store.state.language)
+    },
+    destroyed(){
+      if(this.$store.state.fileName.split('.')[0] == this.$store.state.title){ // if file name has been changed from default
+        this.saveToServer()
+      }
+      document.removeEventListener('keydown', this.keyShortCuts);
     },
     computed: {
       languages() {
@@ -212,6 +235,7 @@
         })
       },
       saveToServer() {
+        this.closeSaveModal();
         this.$store.dispatch('saveDataToServer')
           .then(({data}) => {
             this.$notify({
@@ -220,6 +244,20 @@
             })
             return this.$router.push({name: 'saved', params: {id: data.id}})
           })
+      },
+      checkToShowSaveModal(){
+        if(this.$store.state.fileName.split('.')[0] != this.$store.state.codeTitle) {
+          this.showSaveModal();
+        }else{
+          this.saveToServer();
+        }
+      },
+      checkToShowDownloadModal(){
+        if(this.$store.state.fileName.split('.')[0] != this.$store.state.codeTitle) {
+          this.showDownloadModal();
+        }else{
+          this.downloadCode();
+        }
       },
       InOutBoxToggle() {
         this.$store.commit('toggleInOutBox')
@@ -231,6 +269,14 @@
         // open file select dialogue
         this.$refs.fileUpload.click()
       },
+      showSaveModal() {
+        this.$modal.show('save-modal')
+      },
+      closeSaveModal() {
+        if(this.$store.state.fileName.split('.')[0] != this.$store.state.codeTitle)
+          this.saveFileName(this.$data.def);
+        this.$modal.hide('save-modal')
+      },
       showDownloadModal() {
         this.$modal.show('download-modal')
         setTimeout(() => {
@@ -238,24 +284,19 @@
         }, 200)
       },
       closeDownloadModal() {
+        if(this.$store.state.fileName.split('.')[0] != this.$store.state.codeTitle)
+          this.saveFileName(this.$data.def)
+        this.saveToServer()
         this.$modal.hide('download-modal')
-        this.$data.fileName = this.$store.state.fileName
-      },
-      updateFileName(e) {
-        e.preventDefault()
-        this.$data.fileName = e.target.value
       },
       resetFileName() {
-        this.$store.commit('changeLanguage', this.$store.state.language)
-        this.$refs.fileName.value = this.$data.fileName = this.$store.state.fileName
-        this.$refs.fileName.select()
+        this.$store.commit('fileNameChange', `code`)
       },
-      saveFileName() {
-        this.$store.commit('fileNameChange', this.$data.fileName)
-        this.$modal.hide('download-modal')
+      saveFileName(e) {
+        this.$store.commit('fileNameChange', e.target.value)
       },
       downloadCode() {
-        this.saveFileName()
+        this.closeDownloadModal()
         const code = this.$store.state.code[this.$store.state.language]
         download(`data:text/plain;charset=utf-8,${encodeURIComponent(code)}`, this.$store.state.fileName, 'text/plain')
       },
@@ -299,7 +340,7 @@
         }
         if(isMetaOrCtrlDown && e.keyCode === 83) {
           e.preventDefault()
-          this.saveToServer()
+          this.checkToShowSaveModal()
         }
         if(isMetaOrCtrlDown && e.keyCode === 66) {
           e.preventDefault()
@@ -375,6 +416,28 @@
 </style>
 
 <style>
+  .v--modal{
+    background-color: #1e1e1e !important;
+    color: #fff;
+    box-shadow: none !important;
+  }
+  .v--modal > div{
+    border-bottom: 2px solid #1c1c1c;
+  }
+  .v--modal input{
+    background-color: #1e1e1e !important;
+    color: #fff !important;
+    border-bottom: 1px solid #fff !important;
+  }
+  .v--modal button{
+    background-color: #dc3545 !important;
+    color: #fff !important;
+    border: none !important;
+  }
+  .v--modal button:hover{
+    background-color: #c82333 !important;
+  }
+
   .btn-run {
     background: #e31d3b;
     border-radius: 50px !important;
@@ -521,13 +584,16 @@
   }
 
   .download-modal-button-set {
+    background-color: #202020 !important;
     position: absolute;
     bottom: 0;
     width: 100%;
     height: 80px;
+    justify-content: flex-end !important;
   }
 
   .download-modal-title {
+    background-color: #202020 !important;
     border-bottom: 2px solid #ccc;
   }
 
@@ -609,6 +675,80 @@
   }
 
   .shortcuts-modal-close:hover {
+    color: #181818;
+  }
+
+  .save-modal-title {
+    height: 60px;    
+    font-size: 24px;
+    font-weight: 500;
+  }
+
+  .save-modal-content,
+  .save-modal-title,
+  .save-modal-button-set {
+    letter-spacing: 1px;
+    padding: 8px;
+    text-transform: uppercase;
+  }
+
+  .save-modal-button-set .modal-button {
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #8b8c8d;
+    background: white;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 10px;
+    min-width: 100px;
+    margin: 4px;
+    cursor: pointer;
+    border: 1px solid #b4b4b4;
+    transition: 0.1s all;
+    outline: none;
+  }
+
+  .save-modal-button-set .modal-button:hover {
+    border: 1px solid #181818;
+    color: #181818;
+  }
+
+  .save-modal-button-set {
+    background-color: #202020 !important;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+    justify-content: flex-end !important;
+  }
+
+  .save-modal-title {
+    background-color: #202020 !important;
+    border-bottom: 2px solid #ccc;
+  }
+
+  .save-modal-content {
+    height: calc(100% - 140px);
+  }
+
+  .save-modal-content input {
+    display: block;
+    box-sizing: border-box;
+    margin-bottom: 4px;
+    padding: 8px;
+    margin: 0 8px;
+    width: 280px;
+    font-size: 16px;
+    border: 0;
+    border-bottom: 1px solid #b4b4b4;
+    color: #b4b4b4;
+    font-family: inherit;
+    transition: 0.5s all;
+    outline: none;
+  }
+
+  .save-modal-content input:focus {
+    border-bottom: 1px solid #181818;
     color: #181818;
   }
 
