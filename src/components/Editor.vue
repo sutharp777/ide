@@ -7,7 +7,7 @@
         <monaco-editor></monaco-editor>
       </div>
       <div class="panel-heading status-bar">
-        <input id="file-name-input" class="black" type="text" placeholder="Untitled" :value=this.$store.state.codeTitle @change=changeTitle>
+        <input id="file-name-input" class="black" type="text" placeholder="Untitled" :value=this.$store.state.fileName @change=changeTitle>
       </div>
       <inoutbox></inoutbox>
     </div>

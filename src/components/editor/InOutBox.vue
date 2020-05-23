@@ -176,7 +176,7 @@
     height: 210px;
     bottom: 20px;
     left: 0;
-    z-index: 20;
+    z-index: 10;
   }
 
   #output, #test-input {
