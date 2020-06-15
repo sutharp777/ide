@@ -1,5 +1,5 @@
 <template>
-  <pre id="editor" :class="{ verticalPane : this.$store.state.isVertical && this.$store.state.showInOutBox}"></pre>
+  <pre id="editor" :class="{ verticalPane : this.$store.state.isVertical && this.$store.state.showInOutBox, editorFull : !this.$store.state.showInOutBox}"></pre>
 </template>
 
 <script>
@@ -25,7 +25,7 @@
       addEventListener('dragover', this.dragOverHandler, false)
       addEventListener('drop', this.dropHandler, false)
 
-      this.editor = 
+      this.editor =
         monaco.editor.create(document.getElementById('editor'), {
           // value: this.$store.state.code[this.$store.state.language],
           minimap: {
@@ -86,13 +86,13 @@
               tabSize: this.$store.state.tabSize
             })
             break;
-          case "firebase/enablePairMode": 
+          case "firebase/enablePairMode":
             const value = this.editor.getValue()
             // need to clear editor before initializing firepad
             this.editor.setValue('')
             // setup firepad to track the editor now
             firepad.fromMonaco(this.$store.state.firebase.ref, this.editor)
-            
+
             if (mutation.payload && mutation.payload.keepText) {
               this.editor.setValue(value)
             }
@@ -158,22 +158,27 @@
     overflow: hidden;
     position: relative;
     border: none;
-    height: calc(100vh - 60px);
+    height: calc(70vh - 60px);
     width: 100vw;
     z-index: 10;
     margin: 0;
     border-radius: 0;
     padding-top: 0!important;
   }
+  .editorFull#editor{
+    height: calc(100vh - 60px);
+  }
   @media (min-width: 767px) {
     .verticalPane#editor {
       width: 60vw;
+      height: calc(100vh - 60px);
     }
   }
   @media (min-width: 1375px) {
     .verticalPane#editor {
       width: 100vw;
       max-width: calc(100vw - 550px);
+      height: calc(100vh - 60px);
     }
   }
   .inputarea {
