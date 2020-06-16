@@ -173,7 +173,7 @@
   #inoutbox {
     position: fixed;
     width: 100vw;
-    height: 30%;
+    height: calc(30vh + 30px);
     bottom: 0px;
     left: 0;
     z-index: 10;
@@ -255,7 +255,7 @@
       position: relative;
       right: 0;
       left: 5px;
-      top: calc(-100vh + 15px);
+      top: calc(-100vh + 65px);
       z-index: 9;
       left: 5px;
     }
@@ -285,6 +285,7 @@
     .verticalPane#inoutbox {
       max-width: 550px;
       left: calc(100vw - 550px);
+      bottom:0px;
     }
     .verticalPane #output, .verticalPane #test-input {
       width: 100%;
