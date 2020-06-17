@@ -67,6 +67,11 @@ const go_sample =
   '  fmt.Println("Hello World!")\n' +
   '}\n';
 
+const kotlin_sample = 
+  'fun main(args: Array<String>) {\n' +
+  '  println("Hello World")\n' +
+  '}\n';
+
 const lang_samples = {
   'c': c_sample,
   'cpp': cpp_sample,
@@ -79,7 +84,8 @@ const lang_samples = {
   'nodejs10': js_sample,
   'ruby': ruby_sample,
   'rust': rust_sample,
-  'golang': go_sample
+  'golang': go_sample,
+  'kotlin': kotlin_sample
 };
 
 export default lang_samples
