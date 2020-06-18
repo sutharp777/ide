@@ -17,6 +17,7 @@
     'nodejs8': 'javascript',
     'nodejs10': 'javascript',
     'ruby': 'ruby',
+    'rust': 'rust',
     'golang': 'go',
     'kotlin': 'kotlin'
   }
