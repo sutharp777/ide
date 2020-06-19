@@ -60,6 +60,17 @@ const rust_sample =
   '  println!("Hello, world!");\n' +
   '}\n';
 
+const go_sample =
+  'package main\n' +
+  'import "fmt"\n' +
+  'func main() {\n' +
+  '  fmt.Println("Hello World!")\n' +
+  '}\n';
+
+const kotlin_sample = 
+  'fun main(args: Array<String>) {\n' +
+  '  println("Hello World")\n' +
+  '}\n';
 
 const lang_samples = {
   'c': c_sample,
@@ -72,8 +83,9 @@ const lang_samples = {
   'nodejs8': js_sample,
   'nodejs10': js_sample,
   'ruby': ruby_sample,
-  'rust': rust_sample
+  'rust': rust_sample,
+  'golang': go_sample,
+  'kotlin': kotlin_sample
 };
 
 export default lang_samples
-
