@@ -91,6 +91,7 @@
     bottom: 0px;
     z-index: 10;
     background-color: #202020;
+    height: 20px;
   }
 
   .status-bar #file-name-input {

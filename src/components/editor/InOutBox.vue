@@ -174,7 +174,7 @@
     position: fixed;
     width: 100vw;
     height: calc(30vh + 30px);
-    bottom: 0px;
+    bottom: 20px;
     left: 0;
     z-index: 10;
     background: #202020;
