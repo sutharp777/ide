@@ -6,10 +6,10 @@
         </menuBar>
         <monaco-editor></monaco-editor>
       </div>
+      <inoutbox></inoutbox>
       <div class="panel-heading status-bar">
         <input id="file-name-input" class="black" type="text" placeholder="Untitled" :value=this.$store.state.fileName @change=changeTitle>
       </div>
-      <inoutbox></inoutbox>
     </div>
   </div>
 
@@ -87,6 +87,11 @@
     font-size: 14px;
     border-top: 1px solid #1e1e1e;
     width: 100%;
+    position: absolute;
+    bottom: 0px;
+    z-index: 10;
+    background-color: #202020;
+    height: 20px;
   }
 
   .status-bar #file-name-input {

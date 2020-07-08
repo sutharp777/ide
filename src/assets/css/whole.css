@@ -2,6 +2,7 @@ body {
   padding-top: 0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   overflow: hidden;
+  background-color: #202020;
 }
 
 .top-buffer {
