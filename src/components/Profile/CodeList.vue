@@ -12,14 +12,26 @@
         </thead>
         <tbody>
           <Code 
-            v-for="code in codes" :key=code.id
-            :code=code
+            v-for="code in visibleCodes" :key=code.id
+            :code=code v-bind:currentPage="currentPage"
           >
           </Code>
 
-          <tr v-show=!codes.length>
+          <tr v-if=!codes.length>
             <td colspan="5"> No records found! </td>
           </tr>
+          <tr v-else>
+            <td colspan="5">
+            <Pagination
+              v-bind:codes="codes"
+              v-on:page:update="updatePage"
+              v-bind:currentPage="currentPage"
+              v-bind:pageSize="pageSize">
+            </Pagination>
+
+            </td>
+          </tr>
+          
         </tbody>
       </table>
     </div>
@@ -28,12 +40,37 @@
 
 <script>
 import Code from './Code.vue'
+import { httpGet } from '@/utils/api'
+import Pagination from './Pagination.vue'
 
 export default {
   name: 'CodeList',
   props: ['codes'],
   components: {
-    Code
+    Code,
+    Pagination
+  },
+  data () {
+    return {
+      pageSize: 4,
+      visibleCodes: [],
+      currentPage: 0
+    }
+  },
+  async mounted () {
+    this.updateVisibleCodes()
+  },
+  methods: {
+    updatePage(pageNumber){
+      this.currentPage = pageNumber;
+      this.updateVisibleCodes();
+    },
+    updateVisibleCodes(){
+      this.visibleCodes = this.codes.slice(this.currentPage * this.pageSize , (this.currentPage * this.pageSize) + this.pageSize )
+      if(this.visibleCodes.length == 0 && this.currentPage > 0){
+        this.updatePage(this.currentPage-1)
+      }
+    }
   }
 }
 </script>

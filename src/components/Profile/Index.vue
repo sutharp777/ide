@@ -33,7 +33,7 @@ export default {
     userStore: 'user'
   }),
   async created () {
-    this.fetchCodes()
+    await this.fetchCodes()
   },
   methods: {
     async fetchCodes (title = '', offset = 0, limit) {
@@ -48,6 +48,7 @@ export default {
       })
 
       this.codes = data.codes
+      this.codes.sort((a,b) => a.updatedAt < b.updatedAt ? 1 : -1);
     },
     searchTextChanged (e) {
       this.fetchCodes(this.searchStr)
