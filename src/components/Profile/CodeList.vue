@@ -12,8 +12,8 @@
         </thead>
         <tbody>
           <Code 
-            v-for="code in visibleCodes" :key=code.id
-            :code=code v-bind:currentPage="currentPage"
+            v-for="(code, index) in visibleCodes" :key=code.id
+            :code=code :index=index v-bind:currentPage="currentPage"
           >
           </Code>
 
@@ -40,7 +40,6 @@
 
 <script>
 import Code from './Code.vue'
-import { httpGet } from '@/utils/api'
 import Pagination from './Pagination.vue'
 
 export default {

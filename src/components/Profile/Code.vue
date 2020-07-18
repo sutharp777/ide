@@ -1,6 +1,6 @@
 <template>
   <tr @click=goToSnippet>
-    <td>{{code.id}}</td>
+    <td>{{index +1}}</td>
     <td>{{code.title}}</td>
     <td>{{code.language}}</td>
     <td>{{createdAt}}</td>
@@ -14,7 +14,7 @@ import moment from 'moment'
 
 export default {
   name: 'Code',
-  props: ['code'],
+  props: ['code' , 'index'],
   computed: {
     createdAt () {
       return moment(this.code.createdAt).format('DD MMM YYYY hh:mm:ss')
