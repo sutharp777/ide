@@ -13,7 +13,7 @@
         <tbody>
           <Code 
             v-for="(code, index) in visibleCodes" :key=code.id
-            :code=code :index=index v-bind:currentPage="currentPage"
+            :code=code :index=index v-bind:currentPage="currentPage" v-bind:pageSize="pageSize"
           >
           </Code>
 
@@ -51,7 +51,7 @@ export default {
   },
   data () {
     return {
-      pageSize: 4,
+      pageSize: 5,
       visibleCodes: [],
       currentPage: 0
     }
