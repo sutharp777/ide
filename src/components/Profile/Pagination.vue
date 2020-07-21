@@ -1,10 +1,9 @@
 <template>
-  <div v-if="totalPages() > 0"class="pagination-wrapper">
-    <span v-if="showPreviousLink()" class="pagination-btn" v-on:click="updatePage(currentPage - 1)">
+  <div class="pagination-wrapper">
+    <span v-if="showPreviousLink()" class="pagination-btn" v-on:click="prevPage()">
       <button type="button" class="btn btn-sm btn-run"> Previous </button>
     </span>
-    {{ currentPage + 1 }} of {{ totalPages() }}
-    <span v-if="showNextLink()" class="pagination-btn" v-on:click="updatePage(currentPage + 1)">
+    <span class="pagination-btn" v-on:click="nextPage()">
       <button type="button" class="btn btn-sm btn-run"> Next </button>
     </span>
   </div>
@@ -13,19 +12,24 @@
 <script>
 export default {
   name: 'Pagination',
-  props: ['codes', 'currentPage', 'pageSize'],
+  props: ['codes'],
+  data () {
+    return {
+      offset: 0,
+      limit: 5
+    }
+  },
   methods: {
-    updatePage(pageNumber) {
-      this.$emit('page:update', pageNumber);
+    nextPage(){
+      this.offset = this.offset + this.limit
+      this.$emit('page:update', '', this.offset , 5)
     },
-    totalPages() {
-      return Math.ceil(this.codes.length / this.pageSize);
+    prevPage(){
+      this.offset = this.offset - this.limit
+      this.$emit('page:update' , '' , this.offset , 5 )
     },
     showPreviousLink() {
-      return this.currentPage == 0 ? false : true;
-    },
-    showNextLink() {
-      return this.currentPage == (this.totalPages() - 1) ? false : true;
+      return this.offset == 0 ? false : true;
     }
   }
 }

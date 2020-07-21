@@ -12,8 +12,8 @@
         </thead>
         <tbody>
           <Code 
-            v-for="(code, index) in visibleCodes" :key=code.id
-            :code=code :index=index v-bind:currentPage="currentPage" v-bind:pageSize="pageSize"
+            v-for="(code, index) in codes" :key=code.id
+            :code=code :index=index :updatedIndex=updatedIndex
           >
           </Code>
 
@@ -22,13 +22,9 @@
           </tr>
           <tr v-else>
             <td colspan="5">
-            <Pagination
-              v-bind:codes="codes"
-              v-on:page:update="updatePage"
-              v-bind:currentPage="currentPage"
-              v-bind:pageSize="pageSize">
+            <Pagination :codes=codes
+            v-on:page:update="fetchCodes" >
             </Pagination>
-
             </td>
           </tr>
           
@@ -42,6 +38,8 @@
 import Code from './Code.vue'
 import Pagination from './Pagination.vue'
 
+import { httpGet } from '@/utils/api'
+
 export default {
   name: 'CodeList',
   props: ['codes'],
@@ -51,25 +49,23 @@ export default {
   },
   data () {
     return {
-      pageSize: 5,
-      visibleCodes: [],
-      currentPage: 0
+      updatedIndex: 0
     }
-  },
-  async mounted () {
-    this.updateVisibleCodes()
   },
   methods: {
-    updatePage(pageNumber){
-      this.currentPage = pageNumber;
-      this.updateVisibleCodes();
+    async fetchCodes (title = '', offset, limit) {
+      const { data } = await httpGet('/code', {
+        filter: {
+          title: {
+            $iLike: `%${title}%`
+          }
+        },
+        offset,
+        limit
+      })
+      this.codes = data.codes
+      this.updatedIndex = offset
     },
-    updateVisibleCodes(){
-      this.visibleCodes = this.codes.slice(this.currentPage * this.pageSize , (this.currentPage * this.pageSize) + this.pageSize )
-      if(this.visibleCodes.length == 0 && this.currentPage > 0){
-        this.updatePage(this.currentPage-1)
-      }
-    }
   }
 }
 </script>

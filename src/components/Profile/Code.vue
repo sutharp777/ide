@@ -1,6 +1,6 @@
 <template>
   <tr @click=goToSnippet>
-    <td>{{updatedIndex}}</td>
+    <td>{{index+updatedIndex+1}}</td>
     <td>{{code.title}}</td>
     <td>{{code.language}}</td>
     <td>{{createdAt}}</td>
@@ -14,7 +14,7 @@ import moment from 'moment'
 
 export default {
   name: 'Code',
-  props: ['code' , 'index' , 'currentPage' , 'pageSize'],
+  props: ['code' , 'index' , 'updatedIndex'],
   computed: {
     createdAt () {
       return moment(this.code.createdAt).format('DD MMM YYYY hh:mm:ss')
@@ -22,10 +22,6 @@ export default {
     updatedAt () {
       return moment(this.code.updatedAt).format('DD MMM YYYY hh:mm:ss')
     },
-    updatedIndex(){
-      return (this.currentPage * this.pageSize ) + this.index + 1
-    }
-
   },
   methods: {
     goToSnippet () {

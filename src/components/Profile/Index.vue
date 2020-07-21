@@ -36,7 +36,7 @@ export default {
     await this.fetchCodes()
   },
   methods: {
-    async fetchCodes (title = '', offset = 0, limit) {
+    async fetchCodes (title = '', offset, limit) {
       const { data } = await httpGet('/code', {
         filter: {
           title: {
