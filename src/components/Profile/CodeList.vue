@@ -42,15 +42,18 @@ import { httpGet } from '@/utils/api'
 
 export default {
   name: 'CodeList',
-  props: ['codes'],
   components: {
     Code,
     Pagination
   },
   data () {
     return {
+      codes: [],
       updatedIndex: 0
     }
+  },
+  async created () {
+    await this.fetchCodes()
   },
   methods: {
     async fetchCodes (title = '', offset, limit) {
@@ -64,7 +67,9 @@ export default {
         limit
       })
       this.codes = data.codes
-      this.updatedIndex = offset
+      if(offset || offset == 0){
+        this.updatedIndex = offset
+      }
     },
   }
 }

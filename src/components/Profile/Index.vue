@@ -7,7 +7,7 @@
     <div class="searchUtil">
     <input class="black search" type="text" placeholder="🔍 Search by title..." v-model=searchStr @change=searchTextChanged>
     </div>
-    <CodeList :codes=codes></CodeList>
+    <CodeList ></CodeList>
   </div>
 </template>
 
