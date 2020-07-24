@@ -22,11 +22,11 @@ export default {
   methods: {
     nextPage(){
       this.offset = this.offset + this.limit
-      this.$emit('page:update', '', this.offset , 5)
+      this.$emit('page-update', '', this.offset , this.limit)
     },
     prevPage(){
       this.offset = this.offset - this.limit
-      this.$emit('page:update' , '' , this.offset , 5 )
+      this.$emit('page-update' , '' , this.offset , this.limit )
     },
     showPreviousLink() {
       return this.offset == 0 ? false : true;

@@ -7,7 +7,7 @@
     <div class="searchUtil">
     <input class="black search" type="text" placeholder="🔍 Search by title..." v-model=searchStr @change=searchTextChanged>
     </div>
-    <CodeList ></CodeList>
+    <CodeList :codes=codes v-on:page-update="fetchCodes" ></CodeList>
   </div>
 </template>
 
@@ -33,7 +33,7 @@ export default {
     userStore: 'user'
   }),
   async created () {
-    await this.fetchCodes()
+    await this.fetchCodes(this.$route.query.q)
   },
   methods: {
     async fetchCodes (title = '', offset, limit) {
@@ -49,7 +49,11 @@ export default {
       this.codes = data.codes
     },
     searchTextChanged (e) {
-      this.fetchCodes(this.searchStr)
+      this.$router.push({
+        name: 'search',
+        query: {q: this.searchStr}
+      });
+      this.fetchCodes(this.$route.query.q)
     },
     goBack () {
       this.$router.push({ name: 'root'})

@@ -208,7 +208,7 @@ export default new Vuex.Store({
             commit("setCodeId", data.id);
             commit("setCode", data.code);
             commit("changeCustomInput", data.customInput);
-            commit("fileNameChange", data.fileName);
+            commit("fileNameChange", data.title);
             commit("setCheckData", data.code), commit("setCodeTitle", data.title);
 
             return data;

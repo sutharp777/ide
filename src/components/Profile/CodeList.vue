@@ -23,7 +23,7 @@
           <tr v-else>
             <td colspan="5">
             <Pagination :codes=codes
-            v-on:page:update="fetchCodes" >
+            v-on:page-update="updatePage" >
             </Pagination>
             </td>
           </tr>
@@ -42,35 +42,21 @@ import { httpGet } from '@/utils/api'
 
 export default {
   name: 'CodeList',
+  props: ['codes'],
   components: {
     Code,
     Pagination
   },
   data () {
     return {
-      codes: [],
       updatedIndex: 0
     }
   },
-  async created () {
-    await this.fetchCodes()
-  },
   methods: {
-    async fetchCodes (title = '', offset, limit) {
-      const { data } = await httpGet('/code', {
-        filter: {
-          title: {
-            $iLike: `%${title}%`
-          }
-        },
-        offset,
-        limit
-      })
-      this.codes = data.codes
-      if(offset || offset == 0){
-        this.updatedIndex = offset
-      }
-    },
+    updatePage(a , b , c){
+      this.$emit('page-update', a , b, c)
+      this.updatedIndex = b
+    }
   }
 }
 </script>
