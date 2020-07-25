@@ -3,7 +3,7 @@
     <span v-if="showPreviousLink()" class="pagination-btn" v-on:click="prevPage()">
       <button type="button" class="btn btn-sm btn-run"> Previous </button>
     </span>
-    <span class="pagination-btn" v-on:click="nextPage()">
+    <span v-if="showNextLink()" class="pagination-btn" v-on:click="nextPage()">
       <button type="button" class="btn btn-sm btn-run"> Next </button>
     </span>
   </div>
@@ -30,6 +30,9 @@ export default {
     },
     showPreviousLink() {
       return this.offset == 0 ? false : true;
+    },
+    showNextLink() {
+      return this.codes.length < 5 ? false : true;
     }
   }
 }
