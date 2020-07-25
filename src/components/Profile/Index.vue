@@ -49,8 +49,9 @@ export default {
       this.codes = data.codes
     },
     searchTextChanged (e) {
+    debugger;
       this.$router.push({
-        name: 'search',
+        name: 'profile',
         query: {q: this.searchStr}
       });
       this.fetchCodes(this.$route.query.q)
