@@ -7,9 +7,6 @@
         <monaco-editor></monaco-editor>
       </div>
       <inoutbox></inoutbox>
-      <div class="panel-heading status-bar">
-        <input id="file-name-input" class="black" type="text" placeholder="Untitled" :value=this.$store.state.fileName @change=changeTitle>
-      </div>
     </div>
   </div>
 
@@ -39,12 +36,7 @@
           this.$router.push('/')
         })
       }
-    },
-    methods: {
-      changeTitle(e) {
-        this.$store.commit('setCodeTitle', e.target.value)
-      }
-    }
+    }    
   }
 </script>
 
