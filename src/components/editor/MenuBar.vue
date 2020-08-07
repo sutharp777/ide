@@ -36,6 +36,13 @@
                 </li>
 
                 <li>
+                  <button class="btn btn-sm btn-menu" @click="forkFile()" >
+                  <router-link class="decoration-none" to="/"  active-class="" exact-active-class="">
+                    Fork <i class="fa fa-code-fork" aria-hidden="true"></i>
+                  </router-link>
+                  </button>
+                </li>
+                <li>
                   <button type="button" id="save" class="btn btn-sm btn-menu" @click="checkToShowSaveModal()">
                     Save <i class="fa fa-floppy-o" aria-hidden="true"></i>
                   </button>
@@ -292,6 +299,23 @@
       resetFileName() {
         this.$store.commit('fileNameChange', `code`)
       },
+      forkFile(){
+        const code = this.$store.state.code[this.$store.state.language]
+        if (!code.length) {
+          return
+        }
+        console.log(code)
+        localStorage.forkedLanguage = this.$store.state.language;
+        localStorage.forkedCode = code;
+        localStorage.setItem('forking', 'true');
+
+        window.open("http://localhost:8080/")   //for locally run
+        // window.open("https://ide.codingblocks.com/")   // for run on server
+        this.$notify({
+          text: 'Forked Successfully',
+          type: 'success'
+        })
+      },
       saveFileName(e) {
         this.$store.commit('fileNameChange', e.target.value)
       },
@@ -406,7 +430,7 @@
     font-size: 14px;
     overflow: hidden;
   }
-  
+
   .viewOptionOpen > .dropdown-menu {
     display: list-item !important;
     background-color: #202020;

@@ -39,10 +39,21 @@
           this.$router.push('/')
         })
       }
+      this.checkForFork()
     },
     methods: {
       changeTitle(e) {
         this.$store.commit('setCodeTitle', e.target.value)
+      },
+      checkForFork(){
+        if(localStorage.getItem('forking')==="true") {
+          localStorage.removeItem('forking')
+          this.$store.commit('changeLanguage', localStorage.forkedLanguage)
+          this.$store.commit('uploadCode', localStorage.forkedCode)
+          this.$store.commit('fileNameChange', 'code')
+          localStorage.removeItem('forkedLanguage')
+          localStorage.removeItem('forkedCode')
+        }
       }
     }
   }
