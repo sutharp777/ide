@@ -1,5 +1,5 @@
 <template>
-  <div id="inoutbox" :class="{ verticalPane : this.$store.state.isVertical, resizable : !this.$store.state.isVertical}" 
+  <div id="inoutbox" :class="{ verticalPane : this.$store.state.isVertical, resizable : !this.$store.state.isVertical}"
     class="fsHide" v-bind:style="{ fontSize: this.$store.state.fontSize + 'px' }" v-show="this.$store.state.showInOutBox">
     <div class="panel-input panel-default">
       <div class="panel-heading">
@@ -7,10 +7,10 @@
         <label id="uploadInputFile" ><span class="fa fa-folder-open" style="margin-left: 5px" aria-hidden="true"></span>
           <input type="file" ref="inputFileUpload" style="display:none" @change="uploadInput">
         </label>
-        <a v-on:click="onCopyInput" id="copy-input"> 
+        <a v-on:click="onCopyInput" id="copy-input">
           <i class="fa fa-paperclip" />
         </a>
-        <button v-if="this.$store.state.isVertical" type="button" id="toggleHorizontalPane" class="btn btn-sm btn-menu" 
+        <button v-if="this.$store.state.isVertical" type="button" id="toggleHorizontalPane" class="btn btn-sm btn-menu"
           :class="{ open : isOpen}" @click="open" @blur="close">
           <i class="fa fa-ellipsis-v" aria-hidden="true" style="font-size:14px"></i>
           <ul class="dropdown-menu">
@@ -39,10 +39,10 @@
         <button type="button" id="downloadOutput" class="btn btn-sm btn-menu" @click="downloadOutput()">
           <i class="fa fa-download" aria-hidden="true"></i>
         </button>
-        <a v-on:click="onCopyOutput" id="copy-output"> 
+        <a v-on:click="onCopyOutput" id="copy-output">
           <i class="fa fa-paperclip"/>
         </a>
-        <button v-if="!this.$store.state.isVertical" type="button" id="toggleVerticalPane" class="btn btn-sm btn-menu" 
+        <button v-if="!this.$store.state.isVertical" type="button" id="toggleVerticalPane" class="btn btn-sm btn-menu"
           :class="{ open : isOpen}" @click="open" @blur="close">
           <i class="fa fa-ellipsis-v" aria-hidden="true" style="font-size:14px"></i>
           <ul class="dropdown-menu">
@@ -173,10 +173,11 @@
   #inoutbox {
     position: fixed;
     width: 100vw;
-    height: 210px;
+    height: calc(30vh + 30px);
     bottom: 20px;
     left: 0;
     z-index: 10;
+    background: #202020;
   }
 
   #output, #test-input {
@@ -187,7 +188,7 @@
     overflow: auto;
     background: #202020 !important;
     border: none;
-    border-right: 1px solid #272727; 
+    border-right: 1px solid #272727;
     color: white !important;
   }
 
@@ -254,7 +255,7 @@
       position: relative;
       right: 0;
       left: 5px;
-      top: calc(-100vh + 15px);
+      top: calc(-100vh + 65px);
       z-index: 9;
       left: 5px;
     }
@@ -284,6 +285,7 @@
     .verticalPane#inoutbox {
       max-width: 550px;
       left: calc(100vw - 550px);
+      bottom:0px;
     }
     .verticalPane #output, .verticalPane #test-input {
       width: 100%;
@@ -324,7 +326,7 @@
     margin: 0px 0px 0px auto;
     padding: 0 10px;
     cursor: pointer;
-  } 
+  }
   #downloadOutput {
     margin-left: auto;
   }

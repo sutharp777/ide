@@ -87,6 +87,10 @@
 
             <input type="file" id="upload" style="display:none;">
             <share></share>
+
+          </div>
+          <div class="renameFilename">
+            <input id="file-name-input" class="black" type="text" placeholder="Untitled" :value=this.$store.state.fileName @change=changeTitle>
           </div>
           <div class="logoMenu">
             <login-button></login-button>
@@ -383,6 +387,9 @@
       viewOptionClose () {
         setTimeout(() => { this.isViewOptionOpen=false}, 250 )
       },
+      changeTitle(e) {
+        this.$store.commit('setCodeTitle', e.target.value)
+      }
     }
   }
 </script>
@@ -418,8 +425,13 @@
     height: 40px;
   }
 
+  .renameFilename {
+    display:inline-block;
+    margin-left:10%;
+  }
+
   @media (max-width: 877px) {
-    .logoMenu {
+    .logoMenu, .renameFilename {
       display: none;
     }
   }

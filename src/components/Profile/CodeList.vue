@@ -12,14 +12,22 @@
         </thead>
         <tbody>
           <Code 
-            v-for="code in codes" :key=code.id
-            :code=code
+            v-for="(code, index) in codes" :key=code.id
+            :code=code :index=index :updatedIndex=updatedIndex
           >
           </Code>
 
-          <tr v-show=!codes.length>
+          <tr v-if=!codes.length>
             <td colspan="5"> No records found! </td>
           </tr>
+          <tr v-else>
+            <td colspan="5">
+            <Pagination :codes=codes
+            v-on:page-update="updatePage" >
+            </Pagination>
+            </td>
+          </tr>
+          
         </tbody>
       </table>
     </div>
@@ -28,12 +36,27 @@
 
 <script>
 import Code from './Code.vue'
+import Pagination from './Pagination.vue'
+
+import { httpGet } from '@/utils/api'
 
 export default {
   name: 'CodeList',
   props: ['codes'],
   components: {
-    Code
+    Code,
+    Pagination
+  },
+  data () {
+    return {
+      updatedIndex: 0
+    }
+  },
+  methods: {
+    updatePage(a , b , c){
+      this.$emit('page-update', a , b, c)
+      this.updatedIndex = b
+    }
   }
 }
 </script>
