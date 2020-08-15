@@ -313,8 +313,8 @@
         localStorage.forkedCode = code;
         localStorage.setItem('forking', 'true');
 
-        window.open("http://localhost:8080/")   //for locally run
-        // window.open("https://ide.codingblocks.com/")   // for run on server
+        // window.open("http://localhost:8080/")
+        window.open("https://ide.codingblocks.com/")
         this.$notify({
           text: 'Forked Successfully',
           type: 'success'
