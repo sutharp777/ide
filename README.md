@@ -40,6 +40,7 @@ This responsive online code editor and compiler have the following features.
 |**Multiple Language Support**|Java, C++, C, NodeJS, Python, C#, Ruby, Rust, GO, Java, Kotlin, Javascript.|
 |**Upload Code**|Code can be uploaded from local system.|
 |**Download Code**|Code can be downloaded with the name specified by the user.|
+|**Frok Code**|Code can be cloned into new tab.|
 |**Custom Input**|A custom input box available for the user where user can enter inputs required by the program to run.|
 |**Import Input file**|User can import input file required by the program from local system.|
 |**Download Output**|User can download or copy output of the program.|
@@ -60,6 +61,7 @@ This responsive online code editor and compiler have the following features.
 |**SAVE**| Manually save all the content in localStorage.|
 |**UPLOAD**|Use to button and choose the file from local system to upload.|
 |**DOWNLOAD**|Use the button to download the code in the editor into a file.|
+|**FORK**|Use the button to clone ide code in new tab.|
 |**VIEW**|Use the button to change editor settings and show keyboard shortcuts.|
 |**Reset Defaults**| Reset all the editor settings.|
 |**SHARE**|Use the button to share code.|
