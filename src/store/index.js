@@ -46,7 +46,7 @@ export default new Vuex.Store({
     font: "Ubuntu Mono",
     fontSize: 16,
     tabSize: 4,
-    showInOutBox: false,
+    showInOutBox: true,
     showSettings: false,
     customInput: "",
     customInputBuf: "", //input buffer to store customInput when toggled OFF
@@ -59,7 +59,7 @@ export default new Vuex.Store({
     codeId: null,
     codeTitle: ``,
     submissionId: null,
-    isVertical: false
+    isVertical: true
   },
   modules: {
     user: userModule,
