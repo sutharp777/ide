@@ -4,16 +4,19 @@ name: CI
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
+    branches: [ github-workflows ]
     
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
+    - name: Get Node version
+      id: nvm
+      run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
     - uses: actions/setup-node@v2
       with:
-        node-version: '8'
+        node-version: ${{ steps.nvm.outputs.NODE_VERSION }}
     - name: Install Dependencies
       run: npm install
     - name: Build
@@ -32,7 +35,7 @@ jobs:
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.PRIVATE_KEY }}
         source: "dist"
-        target: "frontends/ide.codingblocks.com"
+        target: "~/frontends/ide.codingblocks.com"
     - name: Replace New Build
       uses: appleboy/ssh-action@master
       with:
