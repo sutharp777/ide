@@ -46,7 +46,7 @@ export default new Vuex.Store({
     font: "Ubuntu Mono",
     fontSize: 16,
     tabSize: 4,
-    showInOutBox: false,
+    showInOutBox: true,
     showSettings: false,
     customInput: "",
     customInputBuf: "", //input buffer to store customInput when toggled OFF
@@ -59,7 +59,7 @@ export default new Vuex.Store({
     codeId: null,
     codeTitle: ``,
     submissionId: null,
-    isVertical: false
+    isVertical: true
   },
   modules: {
     user: userModule,
@@ -285,10 +285,9 @@ export default new Vuex.Store({
           return poll();
         })
         .then(async data => {
-          if (data.outputs.length) {
+          const output = data.output
+          if (data.is_completed) {
             try {
-              const { data: output } = await axios.get(data.outputs[0]);
-
               commit("updateOutput", data.is_successful ? base64.decode(output.stdout) : base64.decode(output.stderr));
             } catch (err) {
               console.log(err);
